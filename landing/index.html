@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PayPrompt — Get paid on time. Automatic invoice reminders for freelancers.</title>
+<meta name="description" content="PayPrompt sends polite, escalating reminders for unpaid invoices and tracks who owes you what. Built for freelancers and small agencies. $19/month.">
+<style>
+:root{--bg:#0b0f14;--card:#121820;--line:#1e2733;--txt:#e8eef5;--mut:#93a3b5;--acc:#4ade80;--acc2:#38bdf8;--warn:#fbbf24}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;background:rgba(11,15,20,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:50}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-weight:800;letter-spacing:-.5px;font-size:19px;display:flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--acc);box-shadow:0 0 14px var(--acc)}
+nav a{color:var(--mut);text-decoration:none;margin-left:18px;font-size:14.5px}
+nav a:hover{color:var(--txt)}
+.btn{display:inline-block;padding:11px 20px;border-radius:10px;font-weight:650;font-size:15px;text-decoration:none;transition:.15s}
+.btn.p{background:var(--acc);color:#052e16}.btn.p:hover{filter:brightness(1.08)}
+.btn.g{border:1px solid var(--line);color:var(--txt)}.btn.g:hover{border-color:var(--mut)}
+.hero{padding:78px 0 62px;text-align:center;background:radial-gradient(700px 320px at 50% -10%,rgba(74,222,128,.12),transparent)}
+h1{font-size:clamp(32px,6vw,54px);line-height:1.08;letter-spacing:-1.6px;font-weight:800}
+h1 span{color:var(--acc)}
+.sub{color:var(--mut);font-size:18px;margin:18px auto 30px;max-width:620px}
+.cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.note{color:var(--mut);font-size:13px;margin-top:14px}
+section{padding:66px 0}
+h2{font-size:clamp(25px,4vw,34px);letter-spacing:-.8px;font-weight:750;text-align:center;margin-bottom:12px}
+.lead{color:var(--mut);text-align:center;max-width:640px;margin:0 auto 42px}
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(255px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px}
+.card h3{font-size:18px;margin-bottom:9px}
+.card p{color:var(--mut);font-size:14.8px}
+.ic{width:42px;height:42px;border-radius:11px;background:rgba(74,222,128,.12);display:grid;place-items:center;font-size:20px;margin-bottom:14px}
+.steps{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));counter-reset:s}
+.step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;position:relative}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#052e16;font-weight:800;font-size:15px;margin-bottom:12px}
+.step h4{font-size:16.5px;margin-bottom:7px}.step p{color:var(--mut);font-size:14.5px}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{text-align:left;padding:14px 12px;border-bottom:1px solid var(--line);font-size:15px}
+th{color:var(--mut);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+td.p{color:var(--acc);font-weight:700}
+.tiers{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));align-items:start}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px}
+.tier.hot{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.tag{font-size:11.5px;font-weight:750;letter-spacing:.09em;text-transform:uppercase;color:var(--acc);margin-bottom:10px;display:block}
+.price{font-size:42px;font-weight:800;letter-spacing:-1.6px}.price small{font-size:16px;color:var(--mut);font-weight:500}
+.tier ul{list-style:none;margin:20px 0 0}
+.tier li{padding:8px 0 8px 26px;color:var(--mut);font-size:14.6px;position:relative}
+.tier li::before{content:"✓";position:absolute;left:0;color:var(--acc);font-weight:800}
+.tier li.no{color:#7d8b9a}.tier li.no::before{content:"×";color:#54626f}
+.faq{max-width:720px;margin:0 auto}
+.faq details{border:1px solid var(--line);border-radius:13px;padding:17px 20px;margin-bottom:12px;background:var(--card)}
+.faq summary{cursor:pointer;font-weight:650;font-size:16px}
+.faq p{color:var(--mut);margin-top:11px;font-size:14.8px}
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--mut);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.pill{display:inline-block;background:rgba(56,189,248,.12);color:var(--acc2);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;margin-bottom:12px}
+@media(max-width:640px){.hero{padding:56px 0 44px}nav a{display:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="logo"><span class="dot"></span>PayPrompt</div>
+  <nav><a href="#how">How it works</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a><a href="#start" class="btn p" style="padding:8px 15px;font-size:14px">Start free</a></nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <span class="pill">For freelancers &amp; small agencies</span>
+  <h1>Get paid on time.<br><span>Automatic invoice reminders.</span></h1>
+  <p class="sub">PayPrompt chases unpaid invoices for you — polite, escalating emails that sound like you, plus a clean dashboard of who owes what and for how long.</p>
+  <div class="cta"><a class="btn p" href="#start">Start free — 7 days</a><a class="btn g" href="#how">See how it works</a></div>
+  <p class="note">No credit card · Works with Stripe & PayPal · Cancel anytime</p>
+</div></div>
+
+<section><div class="wrap">
+  <h2>Money you already earned, sitting still</h2>
+  <p class="lead">Late invoices are not a collections problem — they're an awkward-email problem. PayPrompt removes the awkwardness so you don't have to.</p>
+  <div class="grid">
+    <div class="card"><div class="ic">⏰</div><h3>Reminders on autopilot</h3><p>Set a schedule once. Every overdue invoice gets the right nudge at the right time — no reminders forgotten at 2am.</p></div>
+    <div class="card"><div class="ic">✉️</div><h3>Sounds like you</h3><p>Your tone, your sign-off, your payment link. Clients see your business, not a third-party service.</p></div>
+    <div class="card"><div class="ic">📊</div><h3>See who's dragging their feet</h3><p>Every invoice, every reminder, every reply in one dashboard — sorted by who owes the most, and for how long.</p></div>
+    <div class="card"><div class="ic">🔗</div><h3>Payment links built in</h3><p>Stripe and PayPal links attached automatically, so paying you is one tap for the client and zero friction for you.</p></div>
+    <div class="card"><div class="ic">📄</div><h3>Recurring invoices</h3><p>Retainers and monthly work invoice themselves. Set it once, get paid every month without lifting a finger.</p></div>
+    <div class="card"><div class="ic">🔒</div><h3>Private by default</h3><p>Only you and your client ever see an invoice. No ads, no data resale, no surprises.</p></div>
+  </div>
+</div></section>
+
+<section id="how" style="background:#0d131a;border-top:1px solid var(--line);border-bottom:1px solid var(--line)"><div class="wrap">
+  <h2>Live in three steps</h2><p class="lead">No developer, no migration, no painful setup.</p>
+  <div class="steps">
+    <div class="step"><h4>Connect your invoices</h4><p>Import from a spreadsheet, a CSV export, or just create them in PayPrompt. Each invoice gets a shareable payment page.</p></div>
+    <div class="step"><h4>Set your rules</h4><p>Choose when the first reminder goes out, how often it repeats, and when to stop. Add a late-fee note if you use one.</p></div>
+    <div class="step"><h4>Get paid</h4><p>PayPrompt chases the invoice and flags anything that needs a human touch. You check the dashboard once a week, not daily.</p></div>
+  </div>
+</div></section>
+
+<section id="pricing"><div class="wrap">
+  <h2>Simple pricing</h2><p class="lead">One flat monthly price. No per-client fees, no commission on what you collect.</p>
+  <div class="tiers">
+    <div class="tier"><span class="tag">Starter</span><div class="price">$9<small>/month</small></div>
+      <ul><li>Up to 15 active invoices</li><li>Automated reminders</li><li>Stripe &amp; PayPal links</li><li>Payment page per invoice</li></ul>
+      <a class="btn g" href="#start" style="margin-top:22px;display:block;text-align:center">Start free</a></div>
+    <div class="tier hot"><span class="tag">★ Most popular</span><div class="price">$19<small>/month</small></div>
+      <ul><li>Unlimited invoices</li><li>Escalating reminder sequences</li><li>Recurring &amp; retainer invoices</li><li>Overdue dashboard &amp; reports</li><li>Custom email templates</li></ul>
+      <a class="btn p" href="#start" style="margin-top:22px;display:block;text-align:center">Start 7-day free trial</a></div>
+    <div class="tier"><span class="tag">Agency</span><div class="price">$39<small>/month</small></div>
+      <ul><li>Everything in Pro</li><li>Up to 5 team members</li><li>White-label payment pages</li><li>Client portal access</li><li>Priority support</li></ul>
+      <a class="btn g" href="#start" style="margin-top:22px;display:block;text-align:center">Start free</a></div>
+  </div>
+</div></section>
+
+<section style="background:#0d131a;border-top:1px solid var(--line)"><div class="wrap">
+  <h2>What it costs you to not have it</h2>
+  <p class="lead">Freelancers report losing 5–15% of billed revenue to late payment. On $2,000/month billed, that's $100–300 — more than the Pro plan.</p>
+  <table>
+    <thead><tr><th>Days outstanding</th><th>Typical response rate</th><th>If you bill $2,000/mo</th></tr></thead>
+    <tbody>
+      <tr><td>0–7 days</td><td>Most clients pay</td><td style="color:var(--acc)">On time</td></tr>
+      <tr><td>8–21 days</td><td>Needs a nudge</td><td style="color:var(--warn)">≈ $100 at risk</td></tr>
+      <tr><td>22+ days</td><td>Invoice gets forgotten</td><td style="color:#f87171">≈ $300 at risk</td></tr>
+    </tbody>
+  </table>
+</div></section>
+
+<section id="faq"><div class="wrap faq">
+  <h2>Questions</h2>
+  <div class="faq">
+    <details><summary>Does PayPrompt send emails in my name?</summary><p>Yes. Clients receive a reminder that carries your business name, your sign-off and your payment link. PayPrompt is never presented as the sender.</p></details>
+    <details><summary>What happens if a client ignores the reminders?</summary><p>The sequence stops at the limit you set and the invoice is flagged as "needs attention" in your dashboard. You decide whether to escalate personally or write it off.</p></details>
+    <details><summary>Can I cancel any time?</summary><p>Yes — monthly plans, cancel from settings, no cancellation fee. Your invoices and history stay exportable.</p></details>
+    <details><summary>Is my financial data safe?</summary><p>Invoices are encrypted at rest, payment details are handled by Stripe or PayPal and never touch our servers, and we never sell or share client data.</p></details>
+    <details><summary>Do I need a Stripe account?</summary><p>No. Stripe and PayPal are optional — you can send invoices with bank transfer details instead, or connect either one later.</p></details>
+  </div>
+</div></section>
+
+<section id="start" style="padding-bottom:80px"><div class="wrap">
+  <div class="card" style="text-align:center;padding:52px 26px;background:linear-gradient(160deg,rgba(74,222,128,.10),var(--card))">
+    <h2 style="margin-bottom:10px">Stop waiting for people to pay you</h2>
+    <p class="lead" style="margin-bottom:26px">Start the 7-day free trial. Send your first invoice in under five minutes — and let PayPrompt handle the awkward part.</p>
+    <div class="cta"><a class="btn p" href="mailto:hello@payprompt.app?subject=Start%20my%20PayPrompt%20trial">Start free trial</a><a class="btn g" href="mailto:hello@payprompt.app?subject=PayPrompt%20question">Ask a question</a></div>
+    <p class="note">7 days free · then $19/month · cancel anytime</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div>© 2026 PayPrompt. Built by samilge1-sys.</div>
+  <div>hello@payprompt.app · <a href="https://github.com/samialge1-sys" style="color:var(--mut)">GitHub</a></div>
+</div></footer>
+</body>
+</html>

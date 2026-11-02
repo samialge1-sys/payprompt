@@ -5,8 +5,8 @@
 PayPrompt chases unpaid invoices for you: polite, escalating reminder emails that carry *your* name and sign-off, plus a dashboard of who owes what and for how long.
 
 - Live landing page: https://payprompt-992i58la.agent.mira.tg
-- Pricing: $9 / $19 (Pro) / $39 (Agency) per month, flat, no commission on collected revenue
-- Target: 100 customers x $19 = ~$1.9K MRR (realistic solo-founder band: $200-$1K MRR for most)
+- Pricing: $9 (Starter) / $19 (Pro) / $39 (Agency) per month - flat, no commission on collected revenue
+- North star: 100 customers x $19 = $1,900 MRR
 
 ## Why this and not another app
 
@@ -17,7 +17,7 @@ The product deliberately does ONE thing well: send the right reminder at the rig
 ## Stack
 
 - Next.js 15 (App Router) + TypeScript + Tailwind CSS
-- Postgres (Supabase) via `pg` — plain SQL, no heavy ORM lock-in
+- Postgres (Supabase) via `pg` - plain SQL, no heavy ORM lock-in
 - Stripe (optional) + PayPal (optional) payment links
 - Cron-triggered worker via `POST /api/cron/reminders`
 
@@ -45,6 +45,8 @@ src/app/api/cron/reminders  # worker endpoint, runs every hour
 src/app/api/invoices/[id]   # public payment page data
 db/schema.sql               # tables: users, invoices, reminders, events
 docs/marketing.md            # go-to-market plan
+docs/growth-playbook.md      # funnel, channels, weekly cadence
+docs/onboarding.md           # 5-minute path to first reminder
 ```
 
 ### Reminder engine
@@ -67,7 +69,10 @@ The policy is per-user and stored on the user row, so "polite but firm" is confi
 - [x] Landing page + pricing + FAQ
 - [x] Core reminder engine with escalation policy
 - [x] DB schema + cron worker endpoint
+- [x] CI (typecheck + tests) and Vercel deploy workflows
+- [x] Growth playbook + onboarding spec
 - [ ] Stripe Checkout for subscriptions
+- [ ] PayPal invoice automation (MCP connection pending)
 - [ ] Client-facing payment page (shareable link per invoice)
 - [ ] Dashboard: overdue list sorted by amount x age
 - [ ] Import from CSV
